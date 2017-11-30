@@ -6,7 +6,7 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-
+    <script src="stopword.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
 </head>
@@ -37,7 +37,7 @@
 
 <script>
     // PHOTO INFO
-    var raw_src_image_url, image_user_name;
+    var photo_id, raw_src_image_url, image_user_name, image_description;
 
     //HTML2CANVAS
     var imageUrl = "https://avatars2.githubusercontent.com/u/1195952?s=88&v=4";
@@ -68,7 +68,7 @@
                 var a = document.createElement('a');
                 // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
                 a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-                a.download = 'somefilename.jpg';
+                a.download = filename()+'.jpg';
                 a.click();
               }
             });
@@ -82,16 +82,29 @@
 
     });
 
+    function filename(){
 
-    function fetchUnsplashURL(){
+        var filename = "unsplash-" + image_user_name.replace(/\s/g, '-').toLowerCase() + "-" + photo_id;
 
-        return $('#unsplash_photo_url').val().split('/')[4];
+        // USE IMAGE DESCRIPTION
+        if(image_description != null){
+            filename = image_description.removeStopWords().replace(/\s/g, '-');
+        }
+
+        return filename;
+
+    }
+
+    function fetchPhotoID(){
+
+        photo_id = $('#unsplash_photo_url').val().split('/')[4].replace(/\s/g, '');
 
     }
 
     function fetchUnsplashImageInfo() {
 
-        var photo_id = $('#unsplash_photo_url').val().split('/')[4].replace(/\s/g, '');
+        // FETCH UNSPLASH URL
+        fetchPhotoID()
 
         $.ajax({
             type:"GET",
@@ -100,6 +113,7 @@
             success: function(data){
                 raw_src_image_url = data.urls.raw;
                 image_user_name = data.user.name;
+                image_description = data.description;
 
                 // PRINT PHOTOGRAPHER ON IMAGE
                 $('#output b').text(image_user_name);

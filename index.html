@@ -6,38 +6,53 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="script.js"></script>
     <script src="stopword.js"></script>
+    <link href='style.css' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body>
-    <h3>Image URL</h3>
-    <!-- <input id='unsplash_photo_url' onchange='changeimage()'  onkeyup='changeimage()' style="width:300px;" value="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?dpr=0.6666666865348816&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop="> -->
 
-    <input id='unsplash_photo_url' style="width:300px;" value="https://unsplash.com/photos/cfHUNVmyYR0">
+    <section class="home">
+        <div class="container">
 
-    <span><input type="button" id="save_image_locally" value="Save"/></span>
+            <div class="text-center">
+
+                <h1>Unsplash ✕ Watermarking Tool</h1>
+                <p class="subtitle">Copy and paste Unsplash photo URL into the input below and click Download.</p>
 
 
-    <div class="canvas-editor">
-        
-        <canvas id="s1-canvas"></canvas>
-        <div id='output' class="notupdated whitetext watermark">
-            <span>Unsplash ✕ <b></b></span>
+                <!-- <input id='unsplash_photo_url' onchange='changeimage()'  onkeyup='changeimage()' style="width:300px;" value="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?dpr=0.6666666865348816&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop="> -->
+
+                <input class="center_input" id="unsplash_photo_url" onchange="fetchUnsplashImageInfo()" value="https://unsplash.com/photos/cfHUNVmyYR0">
+
+                <!-- <span><input type="button" id="save_image_locally" value="Save"/></span> -->
+
+                <div class="mt-5">
+                    <a href="#" class="btn btn-custom" id="save_image_locally">Free Download</a>
+                </div>
+
+                <div class="canvas-editor">
+                    
+                    <canvas id="s1-canvas"></canvas>
+                    <div id='output' class="notupdated whitetext watermark">
+                        <span>Unsplash ✕ <b></b></span>
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
-    </div>
-
-
-
-
+    </section>
 
 </body>
 
-
 <script>
     // PHOTO INFO
-    var photo_id, raw_src_image_url, image_user_name, image_description;
+    var photo_id, photo_color, raw_src_image_url, image_user_name, image_description;
 
     //HTML2CANVAS
     var imageUrl = "https://avatars2.githubusercontent.com/u/1195952?s=88&v=4";
@@ -56,155 +71,6 @@
         canvas.getContext('2d').getImageData(0, 0, 100, 100);
     };
     img.src = imageUrl;
-
-
-    $(document).ready(function($) {
-
-        // SAVE IMAGE
-        $('#save_image_locally').click(function(){
-            html2canvas($(".canvas-editor"), 
-            {
-              onrendered: function (canvas) {
-                var a = document.createElement('a');
-                // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-                a.download = filename()+'.jpg';
-                a.click();
-              }
-            });
-          });
-
-        // SAVE QUOTE IMAGE
-        $("#btnColor").click(function() {
-            $('#output').toggleClass('blacktext');
-            $('#output').toggleClass('whitetext');
-        });
-
-    });
-
-    function filename(){
-
-        var filename = "unsplash-" + image_user_name.replace(/\s/g, '-').toLowerCase() + "-" + photo_id;
-
-        // USE IMAGE DESCRIPTION
-        if(image_description != null){
-            filename = image_description.removeStopWords().replace(/\s/g, '-');
-        }
-
-        return filename;
-
-    }
-
-    function fetchPhotoID(){
-
-        photo_id = $('#unsplash_photo_url').val().split('/')[4].replace(/\s/g, '');
-
-    }
-
-    function fetchUnsplashImageInfo() {
-
-        // FETCH UNSPLASH URL
-        fetchPhotoID()
-
-        $.ajax({
-            type:"GET",
-            dataType: "json",
-            url: "https://api.unsplash.com/photos/"+photo_id+"/?client_id=33ce694504bc84f43699526a0130e9e288718cae9f039369d20982c8fcb8641f",
-            success: function(data){
-                raw_src_image_url = data.urls.raw;
-                image_user_name = data.user.name;
-                image_description = data.description;
-
-                // PRINT PHOTOGRAPHER ON IMAGE
-                $('#output b').text(image_user_name);
-
-                // PRINT IMAGE
-                changeimage(raw_src_image_url);
-            }
-        });
-
-    }
-
-
-    function changeimage(raw_src_image_url) {
-
-        var thisVal = raw_src_image_url //GET GLOBAL RAW SRC IMAGE URL
-        var imageUrl = thisVal;
-        var canvas = document.getElementById('s1-canvas');
-        var img = new Image();
-
-        img.crossOrigin = "Anonymous";
-
-        img.onload = function() {
-            canvas.width = this.width;
-            canvas.height = this.height;
-            canvas.getContext('2d').drawImage(this, 0, 0);
-
-            canvas.toDataURL();
-            canvas.getContext('2d').getImageData(0, 0, 100, 100);
-
-            // CHANGE CANVAS SIZE
-            fixCanvasSize();
-        };
-        img.src = imageUrl;
-
-    }
-
-    function fixCanvasSize(){
-        $('.canvas-editor').height($('#s1-canvas').height());
-        $('.canvas-editor').width($('#s1-canvas').width()-1);
-    }
-
 </script>
-
-<style>
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
-    #theImage,
-    #s1-canvas {
-        /*position: absolute;*/
-    }
-    /*#output {
-        text-align: left;
-        overflow: hidden;
-        padding: 0% 0% 0% 10%;
-        max-width: 365px;
-        line-height: 1.5;
-        max-height: 480px;
-        height: 480px;
-        display: table-cell;
-        vertical-align: middle;
-    }*/
-    .canvas-editor {
-        /*overflow: hidden;
-        display: table;*/
-    }
-    #signature, .watermark {
-        position: relative;
-        display: block;
-        right: 45px;
-        bottom: 75px;
-        color: #000;
-        text-align: right;
-    }
-    #output span {
-        text-transform:capitalize
-    }
-    .blacktext span {
-        color: #000;
-        font-weight: bold;
-    }
-    .whitetext > span {
-        color: #fff;
-        font-size: 30px;
-        font-weight: 900;
-        height: 0px;
-    }
-    
-</style>
-
-<!-- max characters 280, skip quote if theres more  -->
-<!-- if there is less than 115 characters; give it space until it hits 115 characters-->
 
 </html>

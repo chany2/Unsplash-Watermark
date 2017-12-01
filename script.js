@@ -43,31 +43,34 @@ function fetchPhotoID(){
 
 function fetchUnsplashImageInfo() {
 
-    // FETCH UNSPLASH URL
-    fetchPhotoID()
+    if($('#unsplash_photo_url').val().startsWith("https://unsplash.com/photos/")){
+        // FETCH UNSPLASH URL
+        fetchPhotoID()
 
-    $.ajax({
-        type:"GET",
-        dataType: "json",
-        url: "https://api.unsplash.com/photos/"+photo_id+"/?client_id=33ce694504bc84f43699526a0130e9e288718cae9f039369d20982c8fcb8641f",
-        success: function(data){
-            regular_src_image_url = data.urls.regular;
-            image_user_name = data.user.name;
-            image_description = data.description;
-            photo_color = data.color;
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url: "https://api.unsplash.com/photos/"+photo_id+"/?client_id=33ce694504bc84f43699526a0130e9e288718cae9f039369d20982c8fcb8641f",
+            success: function(data){
+                regular_src_image_url = data.urls.regular;
+                image_user_name = data.user.name;
+                image_description = data.description;
+                photo_color = data.color;
 
-            // PRINT PHOTOGRAPHER ON IMAGE
-            $('.watermark span').show();
-            $('#output b#photographer_name').text(image_user_name);
+                // PRINT PHOTOGRAPHER ON IMAGE
+                $('.watermark span').show();
+                $('#output b#photographer_name').text(image_user_name);
 
-            // PRINT IMAGE
-            changeimage(regular_src_image_url);
+                // PRINT IMAGE
+                changeimage(regular_src_image_url);
 
-            // CHANGE COLOR TEXT
-            detectBGcolor(photo_color);
-        }
-    });
-
+                // CHANGE COLOR TEXT
+                detectBGcolor(photo_color);
+            }
+        });
+    }else{
+        alert("Not Unsplash Photo URL")
+    }
 }
 
 

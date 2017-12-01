@@ -1,11 +1,10 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     margin: 0;
     background-color: #f7f7f7;
     color:#111;
 }
 h1{
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     font-weight: 800;
     font-size: 50px;
     margin: 0px;
@@ -73,6 +72,7 @@ input{
     color: #fff;
     text-transform: uppercase;
     background-color: #3cb46e;
+    box-shadow: 0 3px 3px rgba(0,0,0,.08);
     display: inline-block;
     border: 1px solid transparent;
     padding: .375rem .75rem;
@@ -94,24 +94,13 @@ input{
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
-/*#output {
-    text-align: left;
-    overflow: hidden;
-    padding: 0% 0% 0% 10%;
-    max-width: 365px;
-    line-height: 1.5;
-    max-height: 480px;
-    height: 480px;
-    display: table-cell;
-    vertical-align: middle;
-}*/
 .canvas-editor {
     margin: 15px auto;
 }
 #signature, .watermark {
     position: absolute;
     display: block;
-    left: 255px;
+    left: 250px;
     bottom: 75px;
     color: #000;
     text-align: left;

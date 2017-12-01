@@ -1,31 +1,21 @@
-## Synopsis
+## Goal
 
-XX
+Provide an alternative option for Unsplash users to credit the photographer when using the Unsplash photo.
 
-## Code Example
 
-XX
+## Description
 
-## Motivation
+Copy and paste a Photo URL into the input. 
 
-XX
+Using the Unsplash API, we can pass the request of the Unsplash Photo URL to fetch the photographer's name, the description, the source image URL, and the color.
 
-## Installation
+Append the photographer's name on top of the image.
 
-XX
+Click Download to save locally new copy of the Unsplash photo with a watermark.
 
 ## API Reference
 
-XX
+Unsplash API https://unsplash.com/documentation
+HTML2Canvas.js https://github.com/niklasvh/html2canvas
+Stopword.js https://github.com/mirzaasif/JS-StopWord
 
-## Tests
-
-XX
-
-## Contributors
-
-XX
-
-## License
-
-XX

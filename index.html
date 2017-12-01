@@ -4,12 +4,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+    <title>Unsplash ✕ Watermarking Tool - Makeday</title>
+    <meta name="description" content="Add the Unsplash photographer watermark on the Unsplash Photo." data-react-helmet="true">
+
+    <link rel="shortcut icon" href="assets/favicon.ico"/>
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="script.js"></script>
     <script src="stopword.js"></script>
     <link href='style.css' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -28,12 +32,7 @@
                 <h1>Unsplash ✕ Watermarking Tool</h1>
                 <p class="subtitle">Copy and paste Unsplash photo URL into the input below and click Download.</p>
 
-
-                <!-- <input id='unsplash_photo_url' onchange='changeimage()'  onkeyup='changeimage()' style="width:300px;" value="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?dpr=0.6666666865348816&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop="> -->
-
-                <input class="center_input" id="unsplash_photo_url" onchange="fetchUnsplashImageInfo()" value="https://unsplash.com/photos/cfHUNVmyYR0" placeholder="Enter Unsplash Photo URL">
-
-                <!-- <span><input type="button" id="save_image_locally" value="Save"/></span> -->
+                <input class="center_input" id="unsplash_photo_url" onchange="fetchUnsplashImageInfo()" value="" placeholder="Enter Unsplash Photo URL">
 
                 <div class="mt-5">
                     <a href="#" class="btn btn-custom" id="save_image_locally">Download Free</a>

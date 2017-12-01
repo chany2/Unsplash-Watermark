@@ -14,10 +14,9 @@ $(document).ready(function($) {
         });
       });
 
-    // SAVE QUOTE IMAGE
-    $("#btnColor").click(function() {
-        $('#output').toggleClass('blacktext');
-        $('#output').toggleClass('whitetext');
+    // TOGGLE COLOR
+    $("#output").click(function() {
+        toggleTextColor();
     });
 
 });

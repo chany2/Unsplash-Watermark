@@ -31,7 +31,7 @@ input{
     position: relative;
 }
 .footer{
-    padding: 50px;
+    padding: 50px 30px;
 }
 .corner {
     position: absolute;
@@ -104,6 +104,9 @@ input{
     bottom: 60px;
     color: #000;
     text-align: left;
+}
+#output {
+    cursor: pointer;
 }
 #output span {
     text-transform:capitalize;

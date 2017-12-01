@@ -98,10 +98,10 @@ input{
     margin: 15px auto;
 }
 #signature, .watermark {
-    position: absolute;
+    position: relative;
     display: block;
-    left: 250px;
-    bottom: 60px;
+    left: 50px;
+    bottom: 70px;
     color: #000;
     text-align: left;
 }

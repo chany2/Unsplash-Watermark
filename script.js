@@ -57,7 +57,8 @@ function fetchUnsplashImageInfo() {
             photo_color = data.color;
 
             // PRINT PHOTOGRAPHER ON IMAGE
-            $('#output b').text(image_user_name);
+            $('.watermark span').show();
+            $('#output b#photographer_name').text(image_user_name);
 
             // PRINT IMAGE
             changeimage(regular_src_image_url);

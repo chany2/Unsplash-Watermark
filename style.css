@@ -1,12 +1,14 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: #6362bb;
+    background-color: #f7f7f7;
+    color:#111;
 }
 h1{
-    font-weight: 400;
-    font-size: 2.5rem;
-    color: #fff;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 800;
+    font-size: 50px;
+    margin: 0px;
 }
 a{
     text-decoration: none;
@@ -29,13 +31,39 @@ input{
     padding-top: 80px;
     position: relative;
 }
+.footer{
+    padding: 50px;
+}
+.corner {
+    position: absolute;
+    text-transform:uppercase;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 800;
+}
+.corner a{
+    color:#111;
+}
+.corner-top-right{
+    top: 30px;
+    right: 30px;
+}
+.corner-bottom-left{
+    left: 30px;
+}
 .container {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
 }
+.heading-secondary {
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
 .subtitle{
-    color: #C0C0E2;
+    font-family: Courier,monospace;
+    color: #111;
 }
 .text-center{
     text-align: center;
@@ -44,7 +72,7 @@ input{
     font-weight: 700;
     color: #fff;
     text-transform: uppercase;
-    background-color: #28D3AB;
+    background-color: #3cb46e;
     display: inline-block;
     border: 1px solid transparent;
     padding: .375rem .75rem;
@@ -55,12 +83,16 @@ input{
     margin: 15px auto;
 }
 .center_input{
-    width: 300px;
-    margin: 15px auto;
+    width: 500px;
+    margin: 30px auto 15px;
+    color: #111111;
+    border: 1px solid #999999;
 }
 #theImage,
 #s1-canvas {
-    /*position: absolute;*/
+    box-shadow: 0 12px 24px 0 rgba(0,0,0,.1);
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 /*#output {
     text-align: left;
@@ -75,13 +107,11 @@ input{
 }*/
 .canvas-editor {
     margin: 15px auto;
-    /*overflow: hidden;
-    display: table;*/
 }
 #signature, .watermark {
-    position: relative;
+    position: absolute;
     display: block;
-    left: 55px;
+    left: 255px;
     bottom: 75px;
     color: #000;
     text-align: left;

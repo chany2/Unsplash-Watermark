@@ -115,10 +115,15 @@ function detectBGcolor(photo_color){
     var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
     if (luma < 128) { // DARK
-        $('#output').toggleClass('blacktext');
-        $('#output').toggleClass('whitetext');
+        $('#output').removeClass('blacktext');
+        $('#output').addClass('whitetext');
     }else{ // LIGHT
-        $('#output').toggleClass('blacktext');
-        $('#output').toggleClass('whitetext');
+        $('#output').addClass('blacktext');
+        $('#output').removeClass('whitetext');
     }
+}
+
+function toggleTextColor(){
+    $('#output').toggleClass('blacktext');
+    $('#output').toggleClass('whitetext');
 }

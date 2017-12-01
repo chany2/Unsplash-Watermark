@@ -101,18 +101,23 @@ input{
     position: absolute;
     display: block;
     left: 250px;
-    bottom: 75px;
+    bottom: 60px;
     color: #000;
     text-align: left;
 }
 #output span {
     text-transform:capitalize;
     font-size: 25px;
-    font-weight: 900;
+    font-weight: 800;
     height: 0px;
+    letter-spacing: 0.02em;
+}
+#photographer_name{
+    font-size: 25px;
+    font-weight: 800;
 }
 .blacktext span {
-    color: #000;
+    color: #111;
 }
 .whitetext > span {
     color: #fff;
